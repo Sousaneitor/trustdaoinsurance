@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustDaoInsurance - Decentralized Protection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .launch-btn {
+            position: relative;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .launch-btn::before {
+            content: 'Launch App';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+        }
+
+        .launch-btn::after {
+            content: 'Coming Soon';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ff00ff, #8000ff);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 45px rgba(255, 0, 255, 0.6);
+        }
+
+        .launch-btn:hover::before {
+            opacity: 0;
+        }
+
+        .launch-btn:hover::after {
+            opacity: 1;
+        }
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            padding-top: 6rem;
+            overflow: hidden;
+        }
+
+        .bg-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(45deg, #00f5ff, #0066ff);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #ff00ff, #8000ff);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 50px) scale(0.9); }
+            75% { transform: translate(30px, 30px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f5ff, #0066ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #a0aec0;
+            margin-top: 0.5rem;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .problem-section {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: rgba(255, 0, 100, 0.1);
+            border: 2px solid rgba(255, 0, 100, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 0, 100, 0.1));
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .problem-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .problem-percentage {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff0064;
+            margin-bottom: 1rem;
+        }
+
+        .solution-section {
+            background: #0a0e27;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 245, 255, 0.4);
+            border-color: #00f5ff;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .coverage-section {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .coverage-table {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .coverage-row {
+            display: grid;
+            grid-template-columns: 2fr 3fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .coverage-row:hover {
+            background: rgba(0, 245, 255, 0.05);
+        }
+
+        .coverage-row:last-child {
+            border-bottom: none;
+        }
+
+        .coverage-header {
+            background: linear-gradient(135deg, #00f5ff, #0066ff);
+            font-weight: 700;
+        }
+
+        .coverage-limit {
+            color: #00f5ff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .premium-section {
+            background: #0a0e27;
+        }
+
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .premium-card {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(0, 102, 255, 0.1));
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 25px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-10px);
+            border-color: #00f5ff;
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.4);
+        }
+
+        .premium-amount {
+            font-size: 1.3rem;
+            color: #a0aec0;
+            margin-bottom: 1rem;
+        }
+
+        .premium-rate {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #00f5ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .premium-discount {
+            background: rgba(255, 0, 255, 0.2);
+            border: 1px solid rgba(255, 0, 255, 0.5);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tokenomics-section {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .token-distribution {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .distribution-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .distribution-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .distribution-item:nth-child(1) { border-color: #00f5ff; }
+        .distribution-item:nth-child(2) { border-color: #0066ff; }
+        .distribution-item:nth-child(3) { border-color: #8000ff; }
+        .distribution-item:nth-child(4) { border-color: #ff00ff; }
+        .distribution-item:nth-child(5) { border-color: #ff0064; }
+        .distribution-item:nth-child(6) { border-color: #00ff88; }
+
+        .distribution-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .distribution-percent {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .distribution-label {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .distribution-amount {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .token-utility {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .utility-card {
+            background: linear-gradient(135deg, rgba(128, 0, 255, 0.2), rgba(255, 0, 255, 0.2));
+            border: 2px solid rgba(255, 0, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .utility-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .utility-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .economic-section {
+            background: #0a0e27;
+        }
+
+        .economic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .economic-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .economic-percentage {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .revenue-projections {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .revenue-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .revenue-row:hover {
+            background: rgba(0, 245, 255, 0.05);
+        }
+
+        .revenue-year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00f5ff;
+        }
+
+        .revenue-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff00ff;
+        }
+
+        .governance-section {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .governance-phases {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .phase-card {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.05), rgba(255, 0, 255, 0.05));
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            border-radius: 25px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phase-number {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            opacity: 0.3;
+        }
+
+        .phase-year {
+            color: #00f5ff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .phase-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-description {
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .roadmap-section {
+            background: #0a0e27;
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #00f5ff, #ff00ff);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        .timeline-date {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00f5ff;
+            margin-bottom: 1rem;
+        }
+
+        .technical-section {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            border-color: #00f5ff;
+            box-shadow: 0 20px 60px rgba(0, 245, 255, 0.3);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: #050818;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .coverage-row { grid-template-columns: 1fr; gap: 1rem; }
+            .revenue-row { grid-template-columns: 1fr; }
+            .timeline::before { left: 20px; }
+            .timeline-content { width: calc(100% - 60px); margin-left: 60px !important; }
+            .timeline-dot { left: 20px; }
+            .phase-number { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-logo">🛡️ TrustDaoInsurance</div>
+        <button class="launch-btn"></button>
+    </nav>
+
+    <div class="hero">
+        <div class="bg-animation">
+            <div class="orb orb1"></div>
+            <div class="orb orb2"></div>
+            <div class="orb orb3"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="logo">🛡️ TrustDaoInsurance</div>
+            <h1>Decentralized Protection<br>for the Web3 Ecosystem</h1>
+            <p>The mutual insurance protocol protecting your crypto future</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">$12.5B</div>
+                    <div class="stat-label">Crypto Losses Since 2020</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">68%</div>
+                    <div class="stat-label">Retail Users Affected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">On-Chain Transparency</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="problem-section">
+        <h2 class="section-title">Crypto Ecosystem Risks</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-percentage">42%</div>
+                <h3>Phishing & Social Engineering</h3>
+                <p>Malicious transactions through identity impersonation</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-percentage">28%</div>
+                <h3>Rug Pulls</h3>
+                <p>Liquidity withdrawal after fundraising</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-percentage">18%</div>
+                <h3>Technical Exploits</h3>
+                <p>Failures in small or unaudited protocols</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-percentage">12%</div>
+                <h3>Key Loss</h3>
+                <p>Irreversible loss of access to funds</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <h2 class="section-title">Our Solution</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Decentralized Mutual Insurance</h3>
+                <p>Members share risks through collective pooling, eliminating traditional intermediaries.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗳️</div>
+                <h3>DAO Governance</h3>
+                <p>Each $TRST token represents one vote. The community decides on claims and protocol development.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Automated Process</h3>
+                <p>From claim submission to automatic disbursement after community approval.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Total Transparency</h3>
+                <p>All operations, funds and votes are visible on-chain on the Polygon network.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Competitive Premiums</h3>
+                <p>Starting from 3% annually, with discounts up to 60% when staking $TRST tokens.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Specialized Coverage</h3>
+                <p>Protection designed specifically for crypto risks that traditional insurance ignores.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="coverage-section">
+        <h2 class="section-title">Covered Risks</h2>
+        <div class="coverage-table">
+            <div class="coverage-row coverage-header">
+                <div>Risk</div>
+                <div>Description</div>
+                <div>Maximum Limit</div>
+            </div>
+            <div class="coverage-row">
+                <div><strong>Phishing</strong></div>
+                <div>Malicious transaction approval through identity impersonation</div>
+                <div class="coverage-limit">$25,000</div>
+            </div>
+            <div class="coverage-row">
+                <div><strong>Rug Pull</strong></div>
+                <div>Liquidity withdrawal after fundraising</div>
+                <div class="coverage-limit">$50,000</div>
+            </div>
+            <div class="coverage-row">
+                <div><strong>Minor DeFi Exploit</strong></div>
+                <div>Failures in small or unaudited protocols</div>
+                <div class="coverage-limit">$15,000</div>
+            </div>
+            <div class="coverage-row">
+                <div><strong>Key Loss</strong></div>
+                <div>Irreversible loss of access without third-party fault</div>
+                <div class="coverage-limit">$10,000</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="premium-section">
+        <h2 class="section-title">Premium Structure</h2>
+        <div class="premium-grid">
+            <div class="premium-card">
+                <div class="premium-amount">Up to $5,000</div>
+                <div class="premium-rate">3%</div>
+                <p style="color: #a0aec0;">Annual Premium Rate</p>
+                <div class="premium-discount">
+                    <strong>💰 Save 10%</strong><br>
+                    <small>with annual payment</small>
+                </div>
+            </div>
+            <div class="premium-card">
+                <div class="premium-amount">$5,001 - $10,000</div>
+                <div class="premium-rate">3.5%</div>
+                <p style="color: #a0aec0;">Annual Premium Rate</p>
+                <div class="premium-discount">
+                    <strong>💰 Save 10%</strong><br>
+                    <small>with annual payment</small>
+                </div>
+            </div>
+            <div class="premium-card">
+                <div class="premium-amount">$10,001 - $25,000</div>
+                <div class="premium-rate">4%</div>
+                <p style="color: #a0aec0;">Annual Premium Rate</p>
+                <div class="premium-discount">
+                    <strong>💰 Save 10%</strong><br>
+                    <small>with annual payment</small>
+                </div>
+            </div>
+            <div class="premium-card">
+                <div class="premium-amount">$25,001 - $50,000</div>
+                <div class="premium-rate">4.5%</div>
+                <p style="color: #a0aec0;">Annual Premium Rate</p>
+                <div class="premium-discount">
+                    <strong>💰 Save 10%</strong><br>
+                    <small>with annual payment</small>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255, 0, 255, 0.1); border-radius: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #ff00ff; margin-bottom: 1rem;">🔥 Staking Bonus</h3>
+            <p style="font-size: 1.2rem;">Stake $TRST tokens and get up to <strong style="color: #00f5ff;">60% discount</strong> on your premiums!</p>
+        </div>
+    </section>
+
+    <section class="tokenomics-section">
+        <h2 class="section-title">Token Distribution</h2>
+        <div class="token-distribution">
+            <p style="text-align: center; color: #a0aec0; margin-bottom: 3rem; font-size: 1.3rem;">
+                <strong style="color: #fff;">Total Supply:</strong> 1,000,000,000 $TRST
+            </p>
+            <div class="distribution-chart">
+                <div class="distribution-item">
+                    <div class="distribution-percent" style="color: #00f5ff;">40%</div>
+                    <div class="distribution-label">Community & Liquidity</div>
+                    <div class="distribution-amount">400,000,000 $TRST</div>
+                    <p style="color: #a0aec0; font-size: 0.85rem; margin-top: 0.5rem;">Presale, farming & airdrops</p>
+                </div>
+                <div class="distribution-item">
+                    <div class="distribution-percent" style="color: #0066ff;">25%</div>
+                    <div class="distribution-label">DAO Treasury</div>
+                    <div class="distribution-amount">250,000,000 $TRST</div>
+                    <p style="color: #a0aec0; font-size: 0.85rem; margin-top: 0.5rem;">Insurance pool seeding</p>
+                </div>
+                <div class="distribution-item">
+                    <div class="distribution-percent" style="color: #8000ff;">15%</div>
+                    <div class="distribution-label">Team & Founders</div>
+                    <div class="distribution-amount">150,000,000 $TRST</div>
+                    <p style="color: #a0aec0; font-size: 0.85rem; margin-top: 0.5rem;">4-year vesting period</p>
+                </div>
+                <div class="distribution-item">
+                    <div class="distribution-percent" style="color: #ff00ff;">10%</div>
+                    <div class="distribution-label">Advisors & Partners</div>
+                    <div class="distribution-amount">100,000,000 $TRST</div>
+                    <p style="color: #a0aec0; font-size: 0.85rem; margin-top: 0.5rem;">Strategic development</p>
+                </div>
+                <div class="distribution-item">
+                    <div class="distribution-percent" style="color: #ff0064;">7%</div>
+                    <div class="distribution-label">Marketing & Growth</div>
+                    <div class="distribution-amount">70,000,000 $TRST</div>
+                    <p style="color: #a0aec0; font-size: 0.85rem; margin-top: 0.5rem;">Protocol expansion</p>
+                </div>
+                <div class="distribution-item">
+                    <div class="distribution-percent" style="color: #00ff88;">3%</div>
+                    <div class="distribution-label">Staking Reserve</div>
+                    <div class="distribution-amount">30,000,000 $TRST</div>
+                    <p style="color: #a0aec0; font-size: 0.85rem; margin-top: 0.5rem;">Staking rewards pool</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #fff;">$TRST Token Utility</h3>
+        <div class="token-utility">
+            <div class="utility-card">
+                <div class="utility-icon">🗳️</div>
+                <h3>Governance Rights</h3>
+                <p>One token equals one vote in DAO decisions. Vote on claims, protocol upgrades, and treasury allocation.</p>
+            </div>
+            <div class="utility-card">
+                <div class="utility-icon">💎</div>
+                <h3>Staking Rewards</h3>
+                <p>Stake your tokens to earn passive rewards and unlock premium discounts up to 60%.</p>
+            </div>
+            <div class="utility-card">
+                <div class="utility-icon">🔥</div>
+                <h3>Buyback & Burn</h3>
+                <p>15% of all premium revenue is used to buyback and burn $TRST, reducing supply and increasing value.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="economic-section">
+        <h2 class="section-title">Economic Model</h2>
+        <h3 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #a0aec0;">Premium Revenue Allocation</h3>
+        <div class="economic-grid">
+            <div class="economic-card">
+                <div class="economic-percentage">80%</div>
+                <h3>Insurance Capital Pool</h3>
+                <p style="color: #a0aec0;">Direct funding for member claims and protocol security</p>
+            </div>
+            <div class="economic-card">
+                <div class="economic-percentage">15%</div>
+                <h3>$TRST Buyback</h3>
+                <p style="color: #a0aec0;">Token buyback mechanism to reduce supply and increase value</p>
+            </div>
+            <div class="economic-card">
+                <div class="economic-percentage">5%</div>
+                <h3>DAO Operations</h3>
+                <p style="color: #a0aec0;">Development, security audits, and operational expenses</p>
+            </div>
+        </div>
+
+        <h3 style="text-align: center; font-size: 2rem; margin-bottom: 3rem; color: #fff;">Revenue Projections</h3>
+        <div class="revenue-projections">
+            <div class="revenue-row">
+                <div class="revenue-year">2026</div>
+                <div class="revenue-amount">$2.5M</div>
+            </div>
+            <div class="revenue-row">
+                <div class="revenue-year">2027</div>
+                <div class="revenue-amount">$12M</div>
+            </div>
+            <div class="revenue-row">
+                <div class="revenue-year">2028</div>
+                <div class="revenue-amount">$35M</div>
+            </div>
+            <div class="revenue-row">
+                <div class="revenue-year">2030</div>
+                <div class="revenue-amount">$315M</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="governance-section">
+        <h2 class="section-title">DAO Governance Evolution</h2>
+        <div class="governance-phases">
+            <div class="phase-card">
+                <div class="phase-number">1</div>
+                <div class="phase-year">2026 - Launch Phase</div>
+                <h3 class="phase-title">Advisory Council</h3>
+                <p class="phase-description">
+                    Initial phase with advisory council providing guidance and temporary veto powers to ensure protocol stability during launch. Critical decisions require community input with structured governance framework.
+                </p>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">2</div>
+                <div class="phase-year">2027 - Transition Phase</div>
+                <h3 class="phase-title">Progressive Decentralization</h3>
+                <p class="phase-description">
+                    Gradual authority transfer to DAO token holders. Implementation of sophisticated voting mechanisms and increased community participation in protocol decisions. Advisory council role becomes consultative only.
+                </p>
+            </div>
+            <div class="phase-card">
+                <div class="phase-number">3</div>
+                <div class="phase-year">2028+ - Full Autonomy</div>
+                <h3 class="phase-title">Complete DAO Control</h3>
+                <p class="phase-description">
+                    Full decentralized governance with all decisions made by token holders. 15% quorum requirement ensures meaningful participation. Smart contract-enforced execution of approved proposals.
+                </p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(0, 245, 255, 0.1); border-radius: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #00f5ff; margin-bottom: 1rem;">🏛️ Governance Requirements</h3>
+            <p style="font-size: 1.1rem;">Critical proposals require a minimum <strong style="color: #ff00ff;">15% quorum</strong> of staked supply to validate voting outcomes</p>
+        </div>
+    </section>
+
+    <section class="roadmap-section">
+        <h2 class="section-title">Roadmap 2026-2028</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Q1 2026</div>
+                    <h3>MVP Launch</h3>
+                    <p>MVP application online, $TRST token presale and issuance of first insurance policies.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Q2 2026</div>
+                    <h3>Claims Activation</h3>
+                    <p>Active claims process and integration with QuickSwap for liquidity.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2027</div>
+                    <h3>Multichain Expansion</h3>
+                    <p>Deployment across multiple blockchains and introduction of advanced coverage options.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2028</div>
+                    <h3>Full DAO Governance</h3>
+                    <p>Complete DAO governance implementation with insurance pool valued over $100M.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="technical-section">
+        <h2 class="section-title">Technical Architecture</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">⛓️</div>
+                <h3>Polygon Network</h3>
+                <p>Built on Polygon for low transaction fees, fast confirmations, and excellent scalability for mass adoption.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">🔐</div>
+                <h3>Security Audits</h3>
+                <p>Smart contracts audited by industry leaders Certik and PeckShield to ensure maximum security and reliability.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">🔗</div>
+                <h3>Chainlink Oracles</h3>
+                <p>Reliable external data feeds through Chainlink's decentralized oracle network for accurate claim verification.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">💼</div>
+                <h3>Gnosis Safe</h3>
+                <p>Multi-signature treasury management using Gnosis Safe for secure fund custody and transparent operations.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">🌐</div>
+                <h3>WalletConnect v2</h3>
+                <p>Seamless wallet integration supporting all major Web3 wallets for easy user onboarding.</p>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">📊</div>
+                <h3>Full Transparency</h3>
+                <p>All transactions, votes, and treasury movements visible on-chain via PolygonScan explorer.</p>
+            </div>
+        </div>
+    </section>
